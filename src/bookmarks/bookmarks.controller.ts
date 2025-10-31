@@ -1,6 +1,7 @@
-import { Controller, Body, Post, Get, Param } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, Patch } from '@nestjs/common';
 import { BookmarksService } from './bookmarks.service';
 import { CreateBookmarkDTO } from './dto/create-bookmark.dto';
+import { UpdateBookmarkDTO } from './dto/update-bookmark.dto';
 
 @Controller('bookmarks')
 export class BookmarksController {
@@ -21,5 +22,13 @@ export class BookmarksController {
     @Get(':id')
     getBookmarkByID(@Param('id') id: string) {
         return this.bookmarksService.getBookmarkById(id);
+    }
+
+    @Patch(":id")
+    updateBookmarkByID(
+        @Param('id') id: string,
+        @Body() dto: UpdateBookmarkDTO,
+    ) {
+        return this.bookmarksService.updateBookmarkByID(id, dto);
     }
 }

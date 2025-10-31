@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateBookmarkDTO } from './dto/create-bookmark.dto';
+import { UpdateBookmarkDTO } from './dto/update-bookmark.dto';
 import { Bookmark } from './schemas/bookmark.schema';
 
 @Injectable()
@@ -28,5 +29,14 @@ export class BookmarksService {
         }
 
         return bookmark;
+    }
+
+    async updateBookmarkByID(id: string, dto: UpdateBookmarkDTO): Promise<Bookmark> {
+        const updateBookmark = await this.bookmarkModel.findByIdAndUpdate(id, dto, { new: true }).exec();
+
+        if (!updateBookmark) {
+            throw new NotFoundException(`Bookmark with ID "${id}" not found`);
+        }
+        return updateBookmark;
     }
 }
