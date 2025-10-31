@@ -16,6 +16,10 @@ export class BookmarksService {
         return newBookmark.save()
     }
 
+    async getAllBookmarks(): Promise<Bookmark[]> {
+        return this.bookmarkModel.find();
+    }
+
 
 
 }

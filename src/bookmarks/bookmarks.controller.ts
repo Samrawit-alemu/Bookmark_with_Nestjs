@@ -1,4 +1,4 @@
-import { Controller, Body, Post } from '@nestjs/common';
+import { Controller, Body, Post, Get } from '@nestjs/common';
 import { BookmarksService } from './bookmarks.service';
 import { CreateBookmarkDTO } from './dto/create-bookmark.dto';
 
@@ -11,5 +11,10 @@ export class BookmarksController {
     @Post()
     createBookmark(@Body() dto: CreateBookmarkDTO) {
         return this.bookmarksService.createBookmark(dto);
+    }
+
+    @Get()
+    getAllBookmarks() {
+        return this.bookmarksService.getAllBookmarks();
     }
 }
