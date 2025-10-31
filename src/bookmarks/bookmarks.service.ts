@@ -39,4 +39,12 @@ export class BookmarksService {
         }
         return updateBookmark;
     }
+
+    async deleteBookmarkByID(id: string): Promise<void> {
+        const result = await this.bookmarkModel.findByIdAndDelete(id).exec();
+
+        if (!result) {
+            throw new NotFoundException(`Bookmark with ID "${id}" not found`)
+        }
+    }
 }
