@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param } from '@nestjs/common';
 import { BookmarksService } from './bookmarks.service';
 import { CreateBookmarkDTO } from './dto/create-bookmark.dto';
 
@@ -16,5 +16,10 @@ export class BookmarksController {
     @Get()
     getAllBookmarks() {
         return this.bookmarksService.getAllBookmarks();
+    }
+
+    @Get(':id')
+    getBookmarkByID(@Param('id') id: string) {
+        return this.bookmarksService.getBookmarkById(id);
     }
 }
